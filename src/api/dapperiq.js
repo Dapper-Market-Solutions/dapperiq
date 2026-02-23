@@ -10,7 +10,7 @@ export async function getClientConfig(clientId) {
   return data
 }
 
-export async function submitOrder({ clientId, segmentName, recordCount, destinationEmail }) {
+export async function submitOrder({ clientId, segmentName, recordCount, destinationEmail, termsAgreedAt }) {
   const res = await fetch('/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -19,6 +19,7 @@ export async function submitOrder({ clientId, segmentName, recordCount, destinat
       segment_name: segmentName,
       record_count: recordCount,
       destination_email: destinationEmail || '',
+      terms_agreed_at: termsAgreedAt || '',
     }),
   })
   if (!res.ok) throw new Error(`Order failed: ${res.status}`)

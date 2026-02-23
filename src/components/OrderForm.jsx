@@ -58,10 +58,12 @@ export default function OrderForm({ config, onSubmit, onBack }) {
 
   function handleConfirmOrder() {
     setShowTerms(false)
+    const termsAgreedAt = new Date().toISOString()
     const orderList = activeOrders.map((o) => ({
       segmentName: o.segmentName,
       recordCount: o.recordCount,
       destinationEmail: extraEmail.trim(),
+      termsAgreedAt,
       status: 'pending',
       result: null,
     }))

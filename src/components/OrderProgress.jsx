@@ -23,6 +23,7 @@ export default function OrderProgress({ orders: initialOrders, clientConfig, onN
           segmentName: initialOrders[i].segmentName,
           recordCount: initialOrders[i].recordCount,
           destinationEmail: initialOrders[i].destinationEmail,
+          termsAgreedAt: initialOrders[i].termsAgreedAt,
         })
 
         setOrders((prev) =>
