@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api/order': {
-          target: env.N8N_WEBHOOK_URL || 'http://localhost:5678',
+          target: env.WEBHOOK_URL || 'http://localhost:5678',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/order/, '/webhook/lead-fulfillment'),
         },
