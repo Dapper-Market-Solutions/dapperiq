@@ -12,7 +12,7 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
         </div>
         {segment.rate > 0 && (
           <span className="text-xs font-medium bg-gold-400/15 text-navy-700 px-2.5 py-1 rounded-full border border-gold-400/30">
-            ${segment.rate.toFixed(3)}/record
+            ${segment.rate.toFixed(2)}/record
           </span>
         )}
       </div>
