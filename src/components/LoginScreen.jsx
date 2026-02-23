@@ -27,7 +27,7 @@ export default function LoginScreen({ onLogin }) {
       <img src="/logo.png" alt="DMS" className="h-16 mb-8" />
 
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-navy-800 mb-2">Welcome to DapperIQ</h1>
+        <h1 className="text-3xl font-bold text-navy-800 mb-2">Welcome to DapperIQ<sup className="text-lg align-super ml-0.5">TM</sup></h1>
         <p className="text-gray-500">Enter your client ID to access your lead portal.</p>
       </div>
 
