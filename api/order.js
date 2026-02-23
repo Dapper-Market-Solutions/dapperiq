@@ -8,17 +8,17 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server misconfigured' })
   }
 
+  const body = { ...req.body }
   const webhookSecret = process.env.N8N_WEBHOOK_SECRET
-  const headers = { 'Content-Type': 'application/json' }
   if (webhookSecret) {
-    headers['X-Webhook-Secret'] = webhookSecret
+    body._webhook_secret = webhookSecret
   }
 
   try {
     const response = await fetch(webhookUrl, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(req.body),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     })
 
     const data = await response.json()
