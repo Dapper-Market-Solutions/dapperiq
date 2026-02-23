@@ -1,11 +1,36 @@
 import { useState } from 'react'
 import SegmentCard from './SegmentCard'
 
+const TERMS = [
+  {
+    title: 'Intended Use',
+    text: 'The data provided through DapperIQ\u2122 is intended for cold email outreach, cold outbound marketing, direct mail campaigns, and use in advertising platforms. These records are not intended for use as telemarketing leads or phone-based solicitation.',
+  },
+  {
+    title: 'Compliance Responsibility',
+    text: 'You are solely responsible for ensuring that your use of the data complies with all applicable federal, state, and local laws and regulations, including but not limited to the CAN-SPAM Act, the Telephone Consumer Protection Act (TCPA), and any state-specific data privacy laws.',
+  },
+  {
+    title: 'Do Not Call (DNC) Compliance',
+    text: 'If you choose to contact any individuals by phone, you agree to scrub all records against the National Do Not Call Registry and any applicable state DNC lists prior to making any calls.',
+  },
+  {
+    title: 'No Liability',
+    text: 'Dapper Market Solutions LLC provides high-intent consumer data as a service. We make no guarantees regarding deliverability, response rates, or conversion. We assume no liability for your misuse of the data or any failure to comply with applicable laws and regulations.',
+  },
+  {
+    title: 'Data Handling',
+    text: 'You agree to handle all delivered records in accordance with industry-standard data security practices and to not resell, redistribute, or share the data with unauthorized third parties.',
+  },
+]
+
 export default function OrderForm({ config, onSubmit, onBack }) {
   const [quantities, setQuantities] = useState(
     Object.fromEntries(config.segments.map((s) => [s.segment_name, 0]))
   )
   const [extraEmail, setExtraEmail] = useState('')
+  const [showTerms, setShowTerms] = useState(false)
+  const [agreed, setAgreed] = useState(false)
 
   function updateQuantity(segmentName, value) {
     setQuantities((prev) => ({ ...prev, [segmentName]: value }))
@@ -27,6 +52,12 @@ export default function OrderForm({ config, onSubmit, onBack }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setAgreed(false)
+    setShowTerms(true)
+  }
+
+  function handleConfirmOrder() {
+    setShowTerms(false)
     const orderList = activeOrders.map((o) => ({
       segmentName: o.segmentName,
       recordCount: o.recordCount,
@@ -109,6 +140,58 @@ export default function OrderForm({ config, onSubmit, onBack }) {
             : 'Select records to order'}
         </button>
       </form>
+
+      {showTerms && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col">
+            <div className="px-6 pt-6 pb-4 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-navy-800">Data Usage &amp; Compliance Agreement</h3>
+              <p className="text-sm text-gray-500 mt-1">Please review and accept before placing your order.</p>
+            </div>
+
+            <div className="px-6 py-4 overflow-y-auto flex-1 space-y-4">
+              {TERMS.map((term, i) => (
+                <div key={i}>
+                  <h4 className="text-sm font-semibold text-navy-700">{i + 1}. {term.title}</h4>
+                  <p className="text-sm text-gray-600 mt-1 leading-relaxed">{term.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="px-6 pb-6 pt-4 border-t border-gray-100 space-y-4">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-navy-600 focus:ring-navy-500"
+                />
+                <span className="text-sm text-gray-700">
+                  I have read and agree to the Data Usage &amp; Compliance Agreement.
+                </span>
+              </label>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowTerms(false)}
+                  className="flex-1 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl
+                             hover:bg-gray-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmOrder}
+                  disabled={!agreed}
+                  className="flex-1 py-2.5 bg-navy-600 text-white font-semibold rounded-xl
+                             hover:bg-navy-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                >
+                  Confirm Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
