@@ -3,13 +3,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const webhookUrl = process.env.WEBHOOK_URL
+  const webhookUrl = process.env.WEBHOOKURL
   if (!webhookUrl) {
     return res.status(500).json({ error: 'Server misconfigured' })
   }
 
   const body = { ...req.body }
-  const webhookSecret = process.env.WEBHOOK_SECRET
+  const webhookSecret = process.env.WEBHOOKSECRET
   if (webhookSecret) {
     body._webhook_secret = webhookSecret
   }
