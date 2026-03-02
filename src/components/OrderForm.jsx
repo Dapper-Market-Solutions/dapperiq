@@ -28,7 +28,6 @@ export default function OrderForm({ config, onSubmit, onBack }) {
   const [quantities, setQuantities] = useState(
     Object.fromEntries(config.segments.map((s) => [s.segment_name, 0]))
   )
-  const [extraEmail, setExtraEmail] = useState('')
   const [showTerms, setShowTerms] = useState(false)
   const [agreed, setAgreed] = useState(false)
 
@@ -62,7 +61,6 @@ export default function OrderForm({ config, onSubmit, onBack }) {
     const orderList = activeOrders.map((o) => ({
       segmentName: o.segmentName,
       recordCount: o.recordCount,
-      destinationEmail: extraEmail.trim(),
       termsAgreedAt,
       status: 'pending',
       result: null,
@@ -94,24 +92,6 @@ export default function OrderForm({ config, onSubmit, onBack }) {
             onQuantityChange={(val) => updateQuantity(segment.segment_name, val)}
           />
         ))}
-
-        <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Additional delivery email <span className="text-gray-400">(optional)</span>
-          </label>
-          <input
-            type="email"
-            value={extraEmail}
-            onChange={(e) => setExtraEmail(e.target.value)}
-            placeholder="colleague@company.com"
-            className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-gray-900
-                       placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy-500
-                       focus:border-transparent transition"
-          />
-          <p className="text-xs text-gray-400 mt-1">
-            The download link will also be sent to this address.
-          </p>
-        </div>
 
         {activeOrders.length > 0 && (
           <div className="bg-navy-50 border border-navy-100 rounded-2xl p-5 space-y-2">
