@@ -29,6 +29,7 @@ export default function OrderForm({ config, onSubmit, onBack }) {
     Object.fromEntries(config.segments.map((s) => [s.segment_name, 0]))
   )
   const [showTerms, setShowTerms] = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
   const [agreed, setAgreed] = useState(false)
 
   function updateQuantity(segmentName, value) {
@@ -55,8 +56,13 @@ export default function OrderForm({ config, onSubmit, onBack }) {
     setShowTerms(true)
   }
 
-  function handleConfirmOrder() {
+  function handleConfirmTerms() {
     setShowTerms(false)
+    setShowAuth(true)
+  }
+
+  function handleAuthorize() {
+    setShowAuth(false)
     const termsAgreedAt = new Date().toISOString()
     const orderList = activeOrders.map((o) => ({
       segmentName: o.segmentName,
@@ -162,14 +168,62 @@ export default function OrderForm({ config, onSubmit, onBack }) {
                   Cancel
                 </button>
                 <button
-                  onClick={handleConfirmOrder}
+                  onClick={handleConfirmTerms}
                   disabled={!agreed}
                   className="flex-1 py-2.5 bg-navy-600 text-white font-semibold rounded-xl
                              hover:bg-navy-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >
-                  Confirm Order
+                  Continue
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showAuth && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full">
+            <div className="px-6 pt-6 pb-4 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-navy-800">Payment Authorization</h3>
+            </div>
+
+            <div className="px-6 py-6 space-y-4">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                By clicking <strong>Authorize</strong>, you authorize <strong>Dapper Market Solutions LLC</strong> to
+                charge your payment method on file for this order.
+              </p>
+
+              {estimatedCost > 0 && (
+                <div className="bg-navy-50 border border-navy-100 rounded-xl p-4 space-y-1">
+                  {activeOrders.map((o) => (
+                    <div key={o.segmentName} className="flex justify-between text-sm text-navy-700">
+                      <span>{o.segmentName}</span>
+                      <span className="tabular-nums">{o.recordCount.toLocaleString()} records</span>
+                    </div>
+                  ))}
+                  <div className="flex justify-between text-sm font-semibold text-navy-800 pt-2 border-t border-navy-200">
+                    <span>Total</span>
+                    <span>${estimatedCost.toFixed(2)}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="px-6 pb-6 flex gap-3">
+              <button
+                onClick={() => setShowAuth(false)}
+                className="flex-1 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl
+                           hover:bg-gray-50 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAuthorize}
+                className="flex-1 py-2.5 bg-navy-600 text-white font-semibold rounded-xl
+                           hover:bg-navy-700 transition"
+              >
+                Authorize
+              </button>
             </div>
           </div>
         </div>
