@@ -103,12 +103,9 @@ export default function OrderProgress({ orders: initialOrders, clientConfig, onN
             )}
 
             {order.status === 'success' && order.result && (
-              <div className="bg-green-50 border border-green-100 rounded-xl p-3 text-sm space-y-1 ml-9">
+              <div className="bg-green-50 border border-green-100 rounded-xl p-3 text-sm ml-9">
                 <p className="text-green-800 font-medium">
                   {order.result.message || 'Order accepted'}
-                </p>
-                <p className="text-green-700">
-                  You'll receive an email with your download link when processing is complete.
                 </p>
               </div>
             )}
