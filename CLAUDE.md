@@ -200,9 +200,13 @@ Webhook → Validate Request → Is Config?
 ### Workflow: "DMS Demo - DIQ Fulfillment"
 - **ID**: `MTlieeUorxEFBF2q`
 - **Status**: Active, TEST_MODE = true (set to false for live billing)
-- **Nodes**: 34
+- **Nodes**: 30 (was 34 — removed TransferNow nodes)
 - **client_id**: `dms2026`
 - **CLF Secret**: see `.claude-secrets.md`
+- **Delivery**: Google Sheet (roster sheet doubles as client delivery sheet)
+- **Config sheet**: `1NlQejk4HEymoeZ_kNQzzkPL4c11Axqpi19_tV1QGDQs` (Sheet1)
+
+**Flow:** Webhook → Read Config → Is Config? → Validate Request → Is Valid? → Has QB Customer? → [payment flow] → Has Roster? → Read Roster → Pull Records → Prepare Post-Delivery → [Append to Roster + Slack] → Update Delivery Stats → Send Email → Success Response
 
 **Test mode:** `TEST_MODE = true` in Validate Request. When true, the "Has QB Customer?" condition also checks `_testMode === false`, so it always routes to the no-invoice path in test mode.
 
