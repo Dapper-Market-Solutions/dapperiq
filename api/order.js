@@ -3,13 +3,21 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const webhookUrl = process.env.WEBHOOKURL
+  const clientId = (req.body.client_id || '').trim().toLowerCase()
+
+  // Per-client routing: CLIENT_ROUTES = {"dms2026":{"url":"...","secret":"..."}}
+  let routes = {}
+  try { routes = JSON.parse(process.env.CLIENT_ROUTES || '{}') } catch {}
+
+  const route = routes[clientId]
+  const webhookUrl = route?.url || process.env.WEBHOOKURL
+  const webhookSecret = route?.secret || process.env.WEBHOOKSECRET
+
   if (!webhookUrl) {
-    return res.status(500).json({ error: 'Server misconfigured' })
+    return res.status(400).json({ error: 'Unknown client' })
   }
 
   const body = { ...req.body }
-  const webhookSecret = process.env.WEBHOOKSECRET
   if (webhookSecret) {
     body._webhook_secret = webhookSecret
   }
