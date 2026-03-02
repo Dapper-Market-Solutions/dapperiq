@@ -1,5 +1,6 @@
 export default function SegmentCard({ segment, quantity, onQuantityChange }) {
   const maxRecords = segment.max_records_per_pull
+  const activeLeads = segment.active_leads
 
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-5 space-y-3 shadow-sm">
@@ -17,12 +18,18 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
         )}
       </div>
 
+      {activeLeads != null && (
+        <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          {activeLeads.toLocaleString()} people searching in the last 7 days
+        </div>
+      )}
+
       <div className="flex items-center gap-4 text-xs text-gray-500">
-        <span>Delivered: {(segment.total_records_delivered || 0).toLocaleString()}</span>
+        <span>{(segment.total_records_delivered || 0).toLocaleString()} delivered</span>
         {segment.last_delivery_date && (
           <span>Last: {segment.last_delivery_date}</span>
         )}
-        <span>Max: {maxRecords.toLocaleString()}</span>
       </div>
 
       {segment.notes && (
