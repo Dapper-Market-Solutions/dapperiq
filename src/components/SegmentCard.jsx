@@ -2,8 +2,14 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
   const maxRecords = segment.max_records_per_pull
   const activeLeads = segment.active_leads
 
+  const isActive = quantity > 0
+
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5 space-y-3 shadow-sm">
+    <div className={`bg-white border rounded-2xl p-5 space-y-3 shadow-sm transition-all duration-200
+      ${isActive
+        ? 'border-navy-300 ring-2 ring-navy-100 shadow-md'
+        : 'border-gray-100 hover:border-navy-200 hover:shadow-md'
+      }`}>
       <div className="flex items-start justify-between">
         <div>
           <h3 className="font-semibold text-gray-900">{segment.segment_name}</h3>

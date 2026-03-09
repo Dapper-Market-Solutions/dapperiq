@@ -85,7 +85,7 @@ export default function OrderForm({ config, onSubmit, onBack }) {
         </button>
         <h2 className="text-2xl font-bold text-navy-800">Place an Order</h2>
         <p className="text-gray-500 mt-1">
-          Select how many records to pull from each segment.
+          Select how many records you'd like from each segment below.
         </p>
       </div>
 
