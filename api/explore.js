@@ -1,7 +1,14 @@
 const AL_URL = 'https://api.audiencelab.io';
 const AL_KEY = process.env.AUDIENCELAB_API_KEY;
-const SAMPLE_SIZE = 1000;
-const SAMPLE_PAGES = 3;
+const PAGE_SIZES = [500, 200, 50];
+const SAMPLE_PAGES = 5;
+
+async function fetchPage(audienceId, page, pageSize) {
+  const url = `${AL_URL}/audiences/${audienceId}?page=${page}&page_size=${pageSize}`;
+  return fetch(url, {
+    headers: { 'X-Api-Key': AL_KEY, 'Accept': 'application/json' },
+  });
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,37 +34,46 @@ export default async function handler(req, res) {
     let recordsSampled = 0;
     let totalRecords = 0;
     let totalPages = 1;
+    let workingPageSize = PAGE_SIZES[0];
 
-    // Sample up to SAMPLE_PAGES pages to estimate the ratio
-    for (let page = 1; page <= SAMPLE_PAGES; page++) {
-      const url = `${AL_URL}/audiences/${audienceId}?page=${page}&page_size=${SAMPLE_SIZE}`;
-      const resp = await fetch(url, {
-        headers: { 'X-Api-Key': AL_KEY, 'Accept': 'application/json' },
-      });
+    // Find a page size that works (some audiences have huge records)
+    for (const size of PAGE_SIZES) {
+      const testResp = await fetchPage(audienceId, 1, size);
+      if (testResp.ok) {
+        workingPageSize = size;
+        const data = await testResp.json();
+        const records = data.data || [];
+        totalRecords = data.total_records || 0;
+        totalPages = data.total_pages || 1;
 
-      if (!resp.ok) {
-        const errText = await resp.text();
-        return res.status(resp.status).json({ error: `API error: ${errText}` });
+        for (const record of records) {
+          if ((record[stateField] || '').toUpperCase() === stateUpper) {
+            stateHits++;
+          }
+        }
+        recordsSampled += records.length;
+        break;
       }
+    }
+
+    if (recordsSampled === 0) {
+      return res.status(502).json({ error: 'Unable to fetch audience data' });
+    }
+
+    // Sample more pages if needed
+    for (let page = 2; page <= SAMPLE_PAGES && page <= totalPages; page++) {
+      const resp = await fetchPage(audienceId, page, workingPageSize);
+      if (!resp.ok) break;
 
       const data = await resp.json();
       const records = data.data || [];
-
-      if (page === 1) {
-        totalRecords = data.total_records || 0;
-        totalPages = data.total_pages || 1;
-      }
 
       for (const record of records) {
         if ((record[stateField] || '').toUpperCase() === stateUpper) {
           stateHits++;
         }
       }
-
       recordsSampled += records.length;
-
-      // If we've seen all pages, no need to continue
-      if (page >= totalPages) break;
     }
 
     // If we sampled everything, use exact count. Otherwise, estimate.
