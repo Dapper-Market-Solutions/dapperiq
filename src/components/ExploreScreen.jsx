@@ -229,7 +229,7 @@ export default function ExploreScreen({ onBack }) {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-navy-700">
-                    {r.count.toLocaleString()}
+                    ~{r.count.toLocaleString()}
                   </div>
                   <div className="text-xs text-gray-400">leads in {STATE_ABBR[selectedState]}</div>
                 </div>
@@ -240,7 +240,7 @@ export default function ExploreScreen({ onBack }) {
           {/* Total + CTA */}
           <div className="bg-navy-50 border border-navy-200 rounded-2xl p-6 text-center">
             <div className="text-4xl font-bold text-navy-800 mb-1">
-              {totalCount.toLocaleString()}
+              ~{totalCount.toLocaleString()}
             </div>
             <div className="text-sm text-gray-500 mb-4">
               total high-intent leads available in {STATE_ABBR[selectedState]}
