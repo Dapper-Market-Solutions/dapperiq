@@ -1,13 +1,25 @@
 const AL_URL = 'https://api.audiencelab.io';
 const AL_KEY = process.env.AUDIENCELAB_API_KEY;
-const PAGE_SIZES = [500, 200, 50];
+const PAGE_SIZES = [500, 200, 50, 20, 10];
 const SAMPLE_PAGES = 5;
 
 async function fetchPage(audienceId, page, pageSize) {
   const url = `${AL_URL}/audiences/${audienceId}?page=${page}&page_size=${pageSize}`;
-  return fetch(url, {
-    headers: { 'X-Api-Key': AL_KEY, 'Accept': 'application/json' },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    return await fetch(url, {
+      headers: { 'X-Api-Key': AL_KEY, 'Accept': 'application/json' },
+      signal: controller.signal,
+    });
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      return { ok: false, status: 408 };
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export default async function handler(req, res) {
