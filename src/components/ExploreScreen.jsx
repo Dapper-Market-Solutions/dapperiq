@@ -43,6 +43,14 @@ const INDUSTRIES = [
     ],
   },
   {
+    id: 'medical-waste',
+    name: 'Medical Waste Disposal',
+    icon: '\u{1F3E5}',
+    audiences: [
+      { id: '8bea8271-31df-4645-b77c-d4011bcb3e91', name: 'Medical Waste Disposal', stateField: 'PERSONAL_STATE' },
+    ],
+  },
+  {
     id: 'roofing',
     name: 'Roofing & Home Services',
     icon: '\u{1F528}',
