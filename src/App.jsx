@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import WelcomeScreen from './components/WelcomeScreen'
 import LoginScreen from './components/LoginScreen'
+import ExploreScreen from './components/ExploreScreen'
 import OrderForm from './components/OrderForm'
 import OrderProgress from './components/OrderProgress'
 
 export default function App() {
-  const [step, setStep] = useState('login')
+  const [step, setStep] = useState('welcome')
   const [clientConfig, setClientConfig] = useState(null)
   const [orders, setOrders] = useState([])
 
@@ -21,7 +23,7 @@ export default function App() {
   }
 
   function handleReset() {
-    setStep('login')
+    setStep('welcome')
     setClientConfig(null)
     setOrders([])
   }
@@ -32,14 +34,23 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-navy-50/40 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header
         clientName={clientConfig?.client_name}
         onLogoClick={handleReset}
       />
       <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-10">
+        {step === 'welcome' && (
+          <WelcomeScreen
+            onCurrentClient={() => setStep('login')}
+            onExplore={() => setStep('explore')}
+          />
+        )}
         {step === 'login' && (
-          <LoginScreen onLogin={handleLogin} />
+          <LoginScreen onLogin={handleLogin} onBack={() => setStep('welcome')} />
+        )}
+        {step === 'explore' && (
+          <ExploreScreen onBack={() => setStep('welcome')} />
         )}
         {step === 'order' && clientConfig && (
           <OrderForm
