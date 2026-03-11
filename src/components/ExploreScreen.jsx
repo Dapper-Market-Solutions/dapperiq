@@ -35,6 +35,14 @@ const INDUSTRIES = [
     ],
   },
   {
+    id: 'golf-carts',
+    name: 'Golf Cart Dealers',
+    icon: '\u{1F3CC}\uFE0F',
+    audiences: [
+      { id: '550da214-d24f-4a2e-ac2d-664de71cd87b', name: 'Golf Cart Buyers', stateField: 'PERSONAL_STATE' },
+    ],
+  },
+  {
     id: 'roofing',
     name: 'Roofing & Home Services',
     icon: '\u{1F528}',
