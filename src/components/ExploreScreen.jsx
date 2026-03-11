@@ -223,7 +223,7 @@ export default function ExploreScreen({ onBack }) {
               >
                 <div>
                   <div className="font-semibold text-gray-800">{r.name}</div>
-                  <div className="text-xs text-gray-400 mt-0.5">
+                  <div className="text-sm text-gray-400 mt-0.5">
                     {r.totalNational.toLocaleString()} records nationally
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default function ExploreScreen({ onBack }) {
                   <div className="text-2xl font-bold text-navy-700">
                     ~{r.count.toLocaleString()}
                   </div>
-                  <div className="text-xs text-gray-400">leads in {STATE_ABBR[selectedState]}</div>
+                  <div className="text-sm text-gray-400">leads in {STATE_ABBR[selectedState]}</div>
                 </div>
               </div>
             ))}

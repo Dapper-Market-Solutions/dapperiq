@@ -10,7 +10,7 @@ export default function Header({ clientName, onLogoClick }) {
         {clientName ? (
           <span className="text-sm text-navy-200">{clientName}</span>
         ) : (
-          <span className="text-xs text-gold-400 tracking-wide hidden sm:block">High-Intent Data, On Demand</span>
+          <span className="text-sm text-gold-400 tracking-wide hidden sm:block">High-Intent Data, On Demand</span>
         )}
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-60" />

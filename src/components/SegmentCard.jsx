@@ -2,23 +2,17 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
   const maxRecords = segment.max_records_per_pull
   const activeLeads = segment.active_leads
 
-  const isActive = quantity > 0
-
   return (
-    <div className={`bg-white border rounded-2xl p-5 space-y-3 shadow-sm transition-all duration-200
-      ${isActive
-        ? 'border-navy-300 ring-2 ring-navy-100 shadow-md'
-        : 'border-gray-100 hover:border-navy-200 hover:shadow-md'
-      }`}>
+    <div className="bg-white border border-gray-100 rounded-2xl p-5 space-y-3 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <h3 className="font-semibold text-gray-900">{segment.segment_name}</h3>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-sm text-gray-400 mt-0.5">
             {segment.client_short} / {segment.segment_short}
           </p>
         </div>
         {segment.rate > 0 && (
-          <span className="text-xs font-medium bg-gold-400/15 text-navy-700 px-2.5 py-1 rounded-full border border-gold-400/30">
+          <span className="text-sm font-medium bg-gold-400/15 text-navy-700 px-2.5 py-1 rounded-full border border-gold-400/30">
             ${segment.rate.toFixed(2)}/record
           </span>
         )}
@@ -31,7 +25,7 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
         </div>
       )}
 
-      <div className="flex items-center gap-4 text-xs text-gray-500">
+      <div className="flex items-center gap-4 text-sm text-gray-500">
         <span>{(segment.total_records_delivered || 0).toLocaleString()} delivered</span>
         {segment.last_delivery_date && (
           <span>Last: {segment.last_delivery_date}</span>
@@ -39,7 +33,7 @@ export default function SegmentCard({ segment, quantity, onQuantityChange }) {
       </div>
 
       {segment.notes && (
-        <p className="text-xs text-gray-400 italic">{segment.notes}</p>
+        <p className="text-sm text-gray-400 italic">{segment.notes}</p>
       )}
 
       <div>
