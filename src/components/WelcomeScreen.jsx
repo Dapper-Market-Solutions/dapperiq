@@ -30,7 +30,7 @@ export default function WelcomeScreen({ onCurrentClient, onExplore }) {
       </div>
 
       <p className="text-sm text-gray-400 mt-6 text-center max-w-xs">
-        Not sure? Choose "Explore" to see what kind of leads we have for your industry and territory.
+        Not sure? Choose "Explore" to see what kind of data we have for your industry and territory.
       </p>
     </div>
   )

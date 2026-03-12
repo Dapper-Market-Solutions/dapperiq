@@ -43,14 +43,6 @@ const INDUSTRIES = [
     ],
   },
   {
-    id: 'medical-waste',
-    name: 'Medical Waste Disposal',
-    icon: '\u{1F3E5}',
-    audiences: [
-      { id: '8bea8271-31df-4645-b77c-d4011bcb3e91', name: 'Medical Waste Disposal', stateField: 'PERSONAL_STATE' },
-    ],
-  },
-  {
     id: 'roofing',
     name: 'Roofing & Home Services',
     icon: '\u{1F528}',
@@ -133,18 +125,18 @@ export default function ExploreScreen({ onBack }) {
     <div className="py-10">
       <div className="text-center mb-10">
         <h1 className="text-3xl font-bold text-navy-800 mb-2">
-          Explore Available Leads
+          Explore Available Data
         </h1>
         <p className="text-gray-500 max-w-lg mx-auto">
-          Choose your industry and state to see how many high-intent leads are available right now.
-          We're consistently adding more industries as demand grows.
+          We have high-intent consumer data across virtually every industry and niche in the United States.
+          Select a sample category below and a state to see what's available right now.
         </p>
       </div>
 
       {/* Step 1: Industry */}
       <div className="mb-8">
         <label className="block text-sm font-semibold text-navy-700 mb-3 uppercase tracking-wide">
-          Step 1 &mdash; Choose Your Industry
+          Step 1 &mdash; Select a Sample Industry
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {INDUSTRIES.map((ind) => (
@@ -206,7 +198,7 @@ export default function ExploreScreen({ onBack }) {
         {loading && (
           <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
         )}
-        {loading ? 'Searching...' : 'Show Available Leads'}
+        {loading ? 'Searching...' : 'Show Available Records'}
       </button>
 
       {/* Error */}
@@ -239,7 +231,7 @@ export default function ExploreScreen({ onBack }) {
                   <div className="text-2xl font-bold text-navy-700">
                     ~{r.count.toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-400">leads in {STATE_ABBR[selectedState]}</div>
+                  <div className="text-sm text-gray-400">records in {STATE_ABBR[selectedState]}</div>
                 </div>
               </div>
             ))}
@@ -251,11 +243,12 @@ export default function ExploreScreen({ onBack }) {
               ~{totalCount.toLocaleString()}
             </div>
             <div className="text-sm text-gray-500 mb-4">
-              total high-intent leads available in {STATE_ABBR[selectedState]}
+              total high-intent records available in {STATE_ABBR[selectedState]}
             </div>
             <p className="text-sm text-gray-600 mb-5 max-w-md mx-auto">
-              These are real people actively researching {industry?.name.toLowerCase()} right now.
-              Book a 15-minute call to see what a sample delivery looks like.
+              These are real consumers actively researching {industry?.name.toLowerCase()} right now.
+              Don't see your industry? We can build a custom dataset for any niche.
+              Book a 15-minute call to learn more.
             </p>
             <a
               href="https://bit.ly/dmsinterview"
