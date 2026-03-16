@@ -50,7 +50,7 @@ Tell Claude: "Clone the DMS 2026 workflow for {client name} with client_id {id}"
 
 #### 1. Webhook
 - **path**: Set a unique path (e.g., `clientname-leads`)
-- This becomes the webhook URL: `https://n8n.srv1379431.hstgr.cloud/webhook/{path}`
+- This becomes the webhook URL: `https://n8n.dmsdata.io/webhook/{path}`
 
 #### 2. Validate Request (Code Node) — THE MAIN NODE TO EDIT
 Update these constants at the top of the code:
@@ -122,8 +122,8 @@ In **Vercel → dapperiq project → Settings → Environment Variables**, updat
 
 ```json
 {
-  "existing_client": { "url": "https://n8n.srv1379431.hstgr.cloud/webhook/existing-path", "secret": "existing-secret" },
-  "new_client_id": { "url": "https://n8n.srv1379431.hstgr.cloud/webhook/{webhook-path}", "secret": "{64-char-hex-secret}" }
+  "existing_client": { "url": "https://n8n.dmsdata.io/webhook/existing-path", "secret": "existing-secret" },
+  "new_client_id": { "url": "https://n8n.dmsdata.io/webhook/{webhook-path}", "secret": "{64-char-hex-secret}" }
 }
 ```
 
@@ -143,7 +143,7 @@ Update `/Users/dappermarketsolutions/Projects/dapperiq/.env.local` with the same
 
 ### Test config (login):
 ```bash
-curl -s -X POST "https://n8n.srv1379431.hstgr.cloud/webhook/{webhook-path}" \
+curl -s -X POST "https://n8n.dmsdata.io/webhook/{webhook-path}" \
   -H "Content-Type: application/json" \
   -d '{"mode":"config","client_id":"{client_id}","_webhook_secret":"{secret}"}'
 ```
@@ -151,7 +151,7 @@ Should return segment list with active lead counts.
 
 ### Test order (small batch):
 ```bash
-curl -s -X POST "https://n8n.srv1379431.hstgr.cloud/webhook/{webhook-path}" \
+curl -s -X POST "https://n8n.dmsdata.io/webhook/{webhook-path}" \
   -H "Content-Type: application/json" \
   -d '{"client_id":"{client_id}","segment_name":"{Segment Name}","record_count":10,"_webhook_secret":"{secret}"}'
 ```

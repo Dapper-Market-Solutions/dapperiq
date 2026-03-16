@@ -35,8 +35,8 @@ users interact with the app → data goes to n8n → n8n responds → result is 
 ## Infrastructure
 
 ### n8n Instance
-- **URL**: `https://n8n.srv1379431.hstgr.cloud/`
-- **Webhook base**: `https://n8n.srv1379431.hstgr.cloud/webhook/`
+- **URL**: `https://n8n.dmsdata.io/`
+- **Webhook base**: `https://n8n.dmsdata.io/webhook/`
 - **Webhook nodes**: Must include `webhookId` (UUID) property on the node for production webhook registration to work via API
 - **Error handler workflow**: `u0EjrFBh2oPy2bcc` (sends Slack alerts on failure)
 
@@ -142,7 +142,7 @@ Client-facing portal for ordering audience data. Clients log in with a client ID
 
 **`.env.local`:** see `.claude-secrets.md` for full values
 ```
-WEBHOOKURL=https://n8n.srv1379431.hstgr.cloud/webhook/lead-fulfillment
+WEBHOOKURL=https://n8n.dmsdata.io/webhook/lead-fulfillment
 WEBHOOKSECRET=<secret>
 CLIENT_ROUTES={"dms2026":{"url":"...","secret":"..."},"bdl":{"url":"...","secret":"..."}}
 ```
