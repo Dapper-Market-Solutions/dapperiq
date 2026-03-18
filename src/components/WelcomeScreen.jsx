@@ -7,7 +7,7 @@ export default function WelcomeScreen({ onCurrentClient, onExplore }) {
         <h1 className="text-3xl font-bold text-navy-800 mb-2">
           Welcome to DapperIQ<sup className="text-lg align-super ml-0.5">TM</sup>
         </h1>
-        <p className="text-gray-500">High-intent consumer data <span className="font-bold underline text-navy-700">across every industry and niche in the United States</span> &mdash; delivered on demand.</p>
+        <p className="text-gray-500">High-intent consumer data across <span className="font-bold underline text-navy-700">every industry and niche in the United States</span> &mdash; delivered on demand.</p>
       </div>
 
       <div className="w-full max-w-sm space-y-3">
