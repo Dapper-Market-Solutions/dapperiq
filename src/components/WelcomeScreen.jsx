@@ -7,7 +7,7 @@ export default function WelcomeScreen({ onCurrentClient, onExplore }) {
         <h1 className="text-3xl font-bold text-navy-800 mb-2">
           Welcome to DapperIQ<sup className="text-lg align-super ml-0.5">TM</sup>
         </h1>
-        <p className="text-gray-500">High-intent consumer data, delivered on demand.</p>
+        <p className="text-gray-500">High-intent consumer data across every industry in the United States &mdash; delivered on demand.</p>
       </div>
 
       <div className="w-full max-w-sm space-y-3">
@@ -29,8 +29,8 @@ export default function WelcomeScreen({ onCurrentClient, onExplore }) {
         </button>
       </div>
 
-      <p className="text-sm text-gray-400 mt-6 text-center max-w-xs">
-        Not sure? Choose "Explore" to see what kind of data we have for your industry and territory.
+      <p className="text-sm text-gray-400 mt-6 text-center max-w-sm">
+        We have data on virtually any audience you can think of &mdash; insurance, solar, legal, home services, medical, marketing, and more. Choose "Explore" to see what's available in your state.
       </p>
     </div>
   )
