@@ -51,6 +51,14 @@ const INDUSTRIES = [
     ],
   },
   {
+    id: 'marketing-agencies',
+    name: 'Marketing & Advertising Agencies',
+    icon: '\u{1F4E3}',
+    audiences: [
+      { id: '334cd3f6-d3d0-4e53-ae75-fad95b414e73', name: 'Marketing & Advertising Agencies', stateField: 'PERSONAL_STATE' },
+    ],
+  },
+  {
     id: 'roofing',
     name: 'Roofing & Home Services',
     icon: '\u{1F528}',
