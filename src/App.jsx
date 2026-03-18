@@ -2,10 +2,16 @@ import { useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import WelcomeScreen from './components/WelcomeScreen'
+import WelcomeScreenV2 from './components/WelcomeScreenV2'
 import LoginScreen from './components/LoginScreen'
 import ExploreScreen from './components/ExploreScreen'
+import ExploreScreenV2 from './components/ExploreScreenV2'
 import OrderForm from './components/OrderForm'
 import OrderProgress from './components/OrderProgress'
+
+const isClassic = new URLSearchParams(window.location.search).get('v') === 'classic'
+const Welcome = isClassic ? WelcomeScreen : WelcomeScreenV2
+const Explore = isClassic ? ExploreScreen : ExploreScreenV2
 
 export default function App() {
   const [step, setStep] = useState('welcome')
@@ -41,7 +47,7 @@ export default function App() {
       />
       <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-10">
         {step === 'welcome' && (
-          <WelcomeScreen
+          <Welcome
             onCurrentClient={() => setStep('login')}
             onExplore={() => setStep('explore')}
           />
@@ -50,7 +56,7 @@ export default function App() {
           <LoginScreen onLogin={handleLogin} onBack={() => setStep('welcome')} />
         )}
         {step === 'explore' && (
-          <ExploreScreen onBack={() => setStep('welcome')} />
+          <Explore onBack={() => setStep('welcome')} />
         )}
         {step === 'order' && clientConfig && (
           <OrderForm
