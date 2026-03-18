@@ -145,7 +145,7 @@ export default function ExploreScreen({ onBack }) {
           Explore Available Data
         </h1>
         <p className="text-gray-500 max-w-lg mx-auto">
-          We have high-intent consumer data across virtually every industry and niche in the United States.
+          We have high-intent consumer data <span className="font-bold underline text-navy-700">across virtually every industry and niche in the United States</span>.
           Select a sample category below and a state to see what's available right now.
         </p>
       </div>
