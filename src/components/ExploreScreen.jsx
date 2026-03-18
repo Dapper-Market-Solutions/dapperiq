@@ -62,8 +62,9 @@ const INDUSTRIES = [
     id: 'roofing',
     name: 'Roofing & Home Services',
     icon: '\u{1F528}',
-    audiences: [],
-    comingSoon: true,
+    audiences: [
+      { id: 'ff1e84a8-c5fb-455b-9de5-c743a8b8a8f0', name: 'Roofing & Home Services', stateField: 'PERSONAL_STATE' },
+    ],
   },
 ]
 
