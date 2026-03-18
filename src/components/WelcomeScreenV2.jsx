@@ -5,7 +5,7 @@ export default function WelcomeScreenV2({ onCurrentClient, onExplore }) {
 
       <div className="text-center mb-10 max-w-xl">
         <h1 className="text-3xl sm:text-4xl font-bold text-navy-800 mb-4 leading-tight">
-          What If You Could See Exactly Who&rsquo;s Researching Your Product{' '}
+          What If You Could See Exactly Who&rsquo;s Researching Your Product or Service{' '}
           <span className="underline decoration-gold-400 decoration-2 underline-offset-4">Right Now</span>?
         </h1>
         <p className="text-gray-500 text-lg leading-relaxed">
