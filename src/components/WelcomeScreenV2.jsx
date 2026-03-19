@@ -48,7 +48,7 @@ export default function WelcomeScreenV2({ onCurrentClient, onExplore, onBulk }) 
 
       <div className="max-w-md text-center">
         <p className="text-sm text-gray-500 leading-relaxed">
-          In the last 30 days, we&rsquo;ve identified over{' '}
+          In the last 7 days, we&rsquo;ve identified over{' '}
           <span className="font-bold text-navy-700">2 million high-intent consumers</span>{' '}
           actively researching insurance, solar, legal services, home services, medical, marketing, and dozens of other industries across{' '}
           <span className="font-bold underline text-navy-700">every niche in the United States</span>.
