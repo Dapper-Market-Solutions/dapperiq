@@ -66,6 +66,14 @@ const INDUSTRIES = [
       { id: 'ff1e84a8-c5fb-455b-9de5-c743a8b8a8f0', name: 'Roofing & Home Services', stateField: 'PERSONAL_STATE' },
     ],
   },
+  {
+    id: 'hvac',
+    name: 'HVAC, Heating & Plumbing',
+    icon: '\u{1F321}\uFE0F',
+    audiences: [
+      { id: '55db91eb-992d-42ea-bf3e-ff7f28f62c9d', name: 'HVAC, Heating & Plumbing', stateField: 'PERSONAL_STATE' },
+    ],
+  },
 ]
 
 const US_STATES = [
