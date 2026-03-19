@@ -8,6 +8,7 @@ import ExploreScreen from './components/ExploreScreen'
 import ExploreScreenV2 from './components/ExploreScreenV2'
 import OrderForm from './components/OrderForm'
 import OrderProgress from './components/OrderProgress'
+import BulkRateCalculator from './components/BulkRateCalculator'
 
 const isClassic = new URLSearchParams(window.location.search).get('v') === 'classic'
 const Welcome = isClassic ? WelcomeScreen : WelcomeScreenV2
@@ -50,6 +51,7 @@ export default function App() {
           <Welcome
             onCurrentClient={() => setStep('login')}
             onExplore={() => setStep('explore')}
+            onBulk={() => setStep('bulk')}
           />
         )}
         {step === 'login' && (
@@ -57,6 +59,9 @@ export default function App() {
         )}
         {step === 'explore' && (
           <Explore onBack={() => setStep('welcome')} />
+        )}
+        {step === 'bulk' && (
+          <BulkRateCalculator onBack={() => setStep('welcome')} />
         )}
         {step === 'order' && clientConfig && (
           <OrderForm

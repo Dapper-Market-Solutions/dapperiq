@@ -1,4 +1,4 @@
-export default function WelcomeScreenV2({ onCurrentClient, onExplore }) {
+export default function WelcomeScreenV2({ onCurrentClient, onExplore, onBulk }) {
   return (
     <div className="flex flex-col items-center justify-center py-16">
       <img src="/logo.png" alt="DMS" className="h-16 mb-10" />
@@ -34,6 +34,15 @@ export default function WelcomeScreenV2({ onCurrentClient, onExplore }) {
                      transition text-center"
         >
           Show Me the Data &mdash; Free, No Commitment
+        </button>
+
+        <button
+          onClick={onBulk}
+          className="w-full py-4 bg-white text-navy-700 font-semibold rounded-xl
+                     border-2 border-yellow-300 hover:border-yellow-400 hover:bg-yellow-50
+                     transition text-center"
+        >
+          Bulk Leads &mdash; 30K+ Records/Month
         </button>
       </div>
 
