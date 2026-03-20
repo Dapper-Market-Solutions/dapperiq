@@ -36,6 +36,7 @@ export default function WelcomeScreenV2({ onCurrentClient, onExplore, onBulk }) 
           Show Me the Data &mdash; Free, No Commitment
         </button>
 
+        {/* Bulk leads button — hidden for now
         <button
           onClick={onBulk}
           className="w-full py-4 bg-white text-navy-700 font-semibold rounded-xl
@@ -44,6 +45,7 @@ export default function WelcomeScreenV2({ onCurrentClient, onExplore, onBulk }) 
         >
           Bulk Leads &mdash; 30K+ Records/Month
         </button>
+        */}
       </div>
 
       <div className="max-w-md text-center">
